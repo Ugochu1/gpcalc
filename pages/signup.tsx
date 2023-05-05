@@ -6,8 +6,8 @@ interface Options {
   body?: BodyInit;
   headers?: {
     "Content-Type": "application/json";
-    Authorization?: string
-  }
+    Authorization?: string;
+  };
 }
 
 export default function Signup() {
@@ -29,11 +29,11 @@ export default function Signup() {
   const submitForm = async () => {
     // here, we submit our form
     const options: Options = {
-      method: 'POST',
-      body: JSON.stringify(details)
-    }
+      method: "POST",
+      body: JSON.stringify(details),
+    };
 
-    const result = await wfetch("/api/signup", options)
+    const result = await wfetch("/api/signup", options);
   };
 
   return (
