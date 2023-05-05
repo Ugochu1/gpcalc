@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { run_database } from "@/lib/mongodb";
 
-export default async function signup(req: NextApiRequest, res: NextApiResponse) {
-  
+export default async function signup(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  res.status(200).json({ name: "Ell received" });
 }

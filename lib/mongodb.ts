@@ -16,16 +16,28 @@ interface Record {
   semester: Semester[];
 }
 
-interface IUser {
+export interface IUser {
   username: string;
   password: string;
   records: Record[];
 }
 
+const semesterSchema = new Schema<Semester>({
+  course: {type: String},
+  score: {type: Number},
+  grade: {type: String}
+})
+
+const recordShema = new Schema<Record>({
+  title: {type: String},
+  last_modified: {type: String},
+  semester: [semesterSchema]
+})
+
 const userSchema = new Schema<IUser>({
-  username: String,
-  password: String,
-  records: Array,
+  username: {type: String},
+  password: {type: String},
+  records: [recordShema],
 });
 
 export const run_database = async () => {
