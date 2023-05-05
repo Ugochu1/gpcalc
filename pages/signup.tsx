@@ -27,10 +27,14 @@ export default function Signup() {
   };
 
   const submitForm = async () => {
+    console.log(details)
     // here, we submit our form
     const options: Options = {
       method: "POST",
       body: JSON.stringify(details),
+      headers: {
+        "Content-Type": "application/json"
+      }
     };
 
     const result = await wfetch("/api/signup", options);
