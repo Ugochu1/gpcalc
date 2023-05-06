@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { wfetch } from "@/lib/wfetch";
 import { FetchOptions } from "@/lib/interfaces/FetchOptions";
 
-export default function Signup() {
+export default function Login() {
   interface userDetails {
     username: string;
     password: string;
@@ -28,8 +28,8 @@ export default function Signup() {
       }
     };
 
-    const result = await wfetch("/api/signup", options);
-    console.log(result.message)
+    const result = await wfetch("/api/login", options);
+    console.log(result)
   };
 
   return (
