@@ -23,10 +23,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
   // check if the user exists
   let result: UserInterface | null;
   try {
-    result = await User.findOne({
-      username: reqBody.username,
-      password: reqBody.password,
-    });
+    result = await User.findOne(reqBody);
   } catch (err) {
     // if there was an error, return null
     result = null;
@@ -38,7 +35,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
       username: result.username,
       password: result.password,
     });
-    res.json({ token });
+    res.json({ user: reqBody, token });
   } else {
     res.json({ message: "Account not found." });
   }

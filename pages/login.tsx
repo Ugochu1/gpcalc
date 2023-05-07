@@ -1,8 +1,13 @@
 import { ChangeEvent, useState } from "react";
 import { wfetch } from "@/lib/wfetch";
 import { FetchOptions } from "@/lib/interfaces/FetchOptions";
+import { setCookie } from "cookies-next";
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
+
   interface userDetails {
     username: string;
     password: string;
@@ -24,12 +29,26 @@ export default function Login() {
       method: "POST",
       body: JSON.stringify(details),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
 
     const result = await wfetch("/api/login", options);
-    console.log(result)
+    if (result.user && result.token) {
+      let expiryTime = 604800*7
+      setCookie("user", result.user, {
+        expires: new Date((Date.now() + expiryTime))
+      }); // set user cookie
+
+      setCookie("accessToken", result.token, {
+        expires: new Date((Date.now() + expiryTime))
+      }); // set your access Token cookie
+
+      // after setting the cookies, redirect to home page.
+      router.push("/");
+    } else {
+      console.log(result);
+    }
   };
 
   return (
