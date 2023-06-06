@@ -12,6 +12,10 @@ export async function middleware(request: NextRequest) {
   let accessToken = request.cookies.get("accessToken");
   let user = request.cookies.get("user");
 
+  // if (!user?.value && !accessToken?.value) {
+  //   return NextResponse.redirect(new URL("/login", request.url))
+  // }
+
   if (user?.value && accessToken?.value) {
     // the cookies exist. So get their value
     const result: Response = await wfetch(
@@ -43,6 +47,7 @@ export async function middleware(request: NextRequest) {
       }
     }
   }
+  
 }
 
 export const config = {

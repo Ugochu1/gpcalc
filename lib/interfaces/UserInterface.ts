@@ -1,16 +1,21 @@
-interface Course {
+export interface Course {
   name: string;
-  score: number;
+  grade: string;
+  unit_load: number;
 }
 
-interface Record {
+export interface PreviewRecord {
+  id: string;
   title: string;
   lastModified: Date;
-  semester: Course[];
 }
 
 export interface UserInterface {
+  _id?: string;
+  firstname: string;
+  lastname: string;
   username: string;
   password: string;
-  records: Record[];
+  createdAt: Date;
+  records: PreviewRecord[];
 }
