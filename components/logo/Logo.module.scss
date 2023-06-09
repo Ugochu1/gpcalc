@@ -1,0 +1,12 @@
+@import "../../style_variables/fonts";
+@import "../../style_variables/colors";
+
+.logoCover {
+  @apply max-w-[300px] flex items-center justify-center;
+  color: $darkgray;
+
+  p {
+    @apply text-sm ml-1;
+    font-family: $mulish;
+  }
+}
