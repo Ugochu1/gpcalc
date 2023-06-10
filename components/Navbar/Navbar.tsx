@@ -44,7 +44,7 @@ const Navbar: FC = () => {
           {/* <span></span> */}
         </div>
         <div className="md:w-3/4 hidden md:flex justify-between items-center">
-          <div className="w-3/4 flex justify-center items-center">
+          <div className="w-3/4 flex justify-end items-center">
             <Link href="/">
               {" "}
               <p
@@ -64,7 +64,7 @@ const Navbar: FC = () => {
             </Link>
           </div>
           <div className="w-1/4 flex justify-end items-center">
-            <button>Login</button>
+            <Link href="/auth/login"><button>Login</button></Link>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ const Navbar: FC = () => {
         <Link href="/dashboard">
           <p className="mb-3">Dashboard</p>
         </Link>
-        <Link href="/login">
+        <Link href="/auth/login">
           <p className="mb-3">Login</p>
         </Link>
       </div>

@@ -3,10 +3,11 @@
 
 .logoCover {
   @apply max-w-[300px] flex items-center justify-center;
-  color: $darkgray;
+  color: $darkpurple;
 
   p {
     @apply text-sm ml-1;
-    font-family: $mulish;
+    font-family: $poppins;
+    font-weight: 800;
   }
 }

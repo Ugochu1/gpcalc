@@ -5,24 +5,40 @@ import styles from "./Login.module.scss";
 import TextInput from "@/components/TextInput/TextInput";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { LoginRequest } from "../api/auth/login";
+import { SignupRequest } from "../api/auth/signup";
 
-const Login: NextPageWithLayout = () => {
+
+
+const Signup: NextPageWithLayout = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginRequest>();
+  } = useForm<SignupRequest>();
 
-  const onSubmit: SubmitHandler<LoginRequest> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignupRequest> = (data) => console.log(data);
   return (
     <>
       <Head>
-        <title>Login page</title>
+        <title>Signup page</title>
       </Head>
-      <div className={styles.header}>Login to your account.</div>
+      <div className={styles.header}>Create new account.</div>
       <div className={"mt-2 " + styles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            name="Firstname"
+            register={register("firstname", { required: true })}
+          />
+          {errors.firstname && (
+            <span className={styles.error}>Firstname field is required</span>
+          )}
+          <TextInput
+            name="Lastname"
+            register={register("lastname", { required: true })}
+          />
+          {errors.firstname && (
+            <span className={styles.error}>Firstname field is required</span>
+          )}
           <TextInput
             name="Username"
             register={register("username", { required: true })}
@@ -30,9 +46,9 @@ const Login: NextPageWithLayout = () => {
           {errors.username && (
             <span className={styles.error}>Username field is required</span>
           )}
-          <div className="flex justify-end text-sm text-blue-700 outline-none">
+          {/* <div className="flex justify-end text-sm text-blue-700 outline-none">
             <Link href="/auth/forgot-password">Forgot Password?</Link>
-          </div>
+          </div> */}
           <TextInput
             name="Password"
             type="password"
@@ -41,11 +57,11 @@ const Login: NextPageWithLayout = () => {
           {errors.password && (
             <span className={styles.error}>Password field is required</span>
           )}
-          <button>Login</button>
+          <button>Sign up</button>
           <p className="mt-5 text-center">
-            Don&apos;t have an account yet?{" "}
-            <Link href="/auth/signup">
-              <span className="text-blue-600">Sign Up</span>
+            Already have an account?{" "}
+            <Link href="/auth/login">
+              <span className="text-blue-600">Login</span>
             </Link>
           </p>
         </form>
@@ -54,8 +70,8 @@ const Login: NextPageWithLayout = () => {
   );
 };
 
-Login.getLayout = function (page) {
-  return <AuthLayout full={false}>{page}</AuthLayout>;
+Signup.getLayout = function (page) {
+  return <AuthLayout full={true}>{page}</AuthLayout>;
 };
 
-export default Login;
+export default Signup;

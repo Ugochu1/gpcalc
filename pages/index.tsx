@@ -10,23 +10,39 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
 
 import { IoChevronForwardSharp, IoChevronBackSharp } from "react-icons/io5";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import Footer from "@/components/footer/Footer";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [idx, setIdx] = useState<number>(0);
+  const router = useRouter();
 
   const changeSlideForward = () => {
     switch (idx) {
-      case 0: setIdx(1); break;
-      case 1: setIdx(2); break;
-      case 2: setIdx(0); break;
+      case 0:
+        setIdx(1);
+        break;
+      case 1:
+        setIdx(2);
+        break;
+      case 2:
+        setIdx(0);
+        break;
     }
   };
 
   const changeSlideBackward = () => {
     switch (idx) {
-      case 0: setIdx(2); break;
-      case 1: setIdx(0); break;
-      case 2: setIdx(1); break;
+      case 0:
+        setIdx(2);
+        break;
+      case 1:
+        setIdx(0);
+        break;
+      case 2:
+        setIdx(1);
+        break;
     }
   };
 
@@ -65,15 +81,16 @@ export default function Home() {
               process and unlock your true potential with our user-friendly GPA
               calculator. Start calculating with ease today!
             </p>
-            <button>Register with Us!</button>
+            <button onClick={() => router.push("/auth/signup")}>Register with Us</button>
+            <button>Calculate Now!</button>
           </div>
           <div className={styles.pictures}>
             <Image
               src={Problem}
               alt="Image One"
               style={{
-                height: "470px",
-                width: "470px",
+                height: "450px",
+                width: "450px",
                 objectFit: "cover",
               }}
             />
@@ -85,14 +102,15 @@ export default function Home() {
           }
         >
           <div className={styles.writeup}>
-            <h1>Good News! Your problems are gone, with us around.</h1>
+            <h1>Your problems are gone, with us around.</h1>
             <p>
               Our GPA calculator is the ultimate solution for all your grade
               point average calculation woes. Say goodbye to the stress and
               confusion of manual calculations or outdated methods. With our
               cutting-edge tool, calculating your GPA has never been easier.{" "}
             </p>
-            <button>Register with Us!</button>
+            <button onClick={() => router.push("/auth/signup")}>Register with Us</button>
+            <button>Calculate Now</button>
           </div>
           <div className={styles.pictures}>
             <Image
@@ -120,7 +138,8 @@ export default function Home() {
               you instant access to your academic records. No more digging
               through piles of paperwork or searching for old report cards.
             </p>
-            <button>Register with Us!</button>
+            <button onClick={() => router.push("/auth/signup")}>Register with Us</button>
+            <button>Calculate Now</button>
           </div>
           <div className={styles.pictures}>
             <Image
@@ -172,6 +191,28 @@ export default function Home() {
       <div className={styles.forwardbutton} onClick={changeSlideForward}>
         <IoChevronForwardSharp size={30} />
       </div>
+      <div
+        className={`${styles.moreInfo} ${
+          idx === 0 ? styles.red : idx === 1 ? styles.green : styles.blue
+        }`}
+      >
+        <div>
+          <h1>
+            Track Your Progress.{" "}
+            <span className="text-green-200">Improve.</span>{" "}
+            <span className="text-green-300">Excel.</span>{" "}
+            <BsFillCheckCircleFill style={{ display: "inline" }} size={30} />
+          </h1>
+          <p>
+            Monitor your academic progress effortlessly. Our GPA calculator
+            enables you to keep a close eye on your grade point average over
+            time. By tracking your GPA, you can identify areas for improvement
+            and set goals to achieve the academic success you desire.
+          </p>
+          <button onClick={() => router.push("/auth/signup")}>Register with us Now</button>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -7,25 +7,21 @@
 }
 
 .navbar {
-  @apply fixed w-full md:px-10 px-5 py-5 top-0 z-10;
-  @apply flex flex-col;
+  @apply fixed w-full md:px-10 px-5 py-3 top-0 z-20 bg-white;
+  @apply flex flex-col shadow;
   font-family: $mulish;
   outline: none;
 
   .link {
     @apply my-0 mr-5;
     color: $darkgray;
-    padding: 0 0 5px 0;
-    border-bottom: 2px solid white;
+    // padding: 0 0 5px 0;
+    // border-bottom: 2px solid white;
     outline: none;
-
-    &.active {
-      @include activeBlue();
-    }
-    &:hover {
-      @include activeBlue();
-      border-bottom: 2px solid white;
-    }
+    // &:hover {
+    //   @include activeBlue();
+    //   border-bottom: 2px solid white;
+    // }
   }
 
   button {

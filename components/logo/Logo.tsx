@@ -2,13 +2,13 @@ import { FC } from "react";
 import { FaCalculator } from "react-icons/fa";
 import styles from "./Logo.module.scss";
 
-const Logo: FC = () => {
+const Logo: FC<any> = (props) => {
   return (
-    <div className={styles.logoCover}>
+    <div className={styles.logoCover} {...props}>
       <div>
         <FaCalculator size={16} />
       </div>
-      <p>GP Calculator</p>
+      <p>GP-C</p>
     </div>
   );
 };
