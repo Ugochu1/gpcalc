@@ -1,18 +1,19 @@
-import { LoginRequest, LoginResponse } from "@/pages/auth/login";
+// import { LoginRequest, LoginResponse } from "@/pages/auth/login";
 import http from "../hooks/useHttp";
-import { SignupRequest } from "@/pages/auth/signup";
+import { SignupRequest } from "@/pages/api/auth/signup";
 import { UserDetails } from "./client";
+import { LoginRequest, LoginResponse } from "@/pages/api/auth/login";
 
 class AuthService {
   // instantiate the api
   static get api() {
     return http({
-      baseURL: `${process.env.BASE_URL}/api/auth`,
+      baseURL: `http://localhost:3000/api/auth`,
     });
   }
 
   static login(payload: LoginRequest) {
-    return this.api.post<LoginRequest, LoginResponse>("/login", payload);
+    return this.api.post<LoginRequest, LoginResponse | string>("/login", payload);
   }
 
   static signup(payload: SignupRequest) {

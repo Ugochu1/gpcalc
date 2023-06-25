@@ -11,9 +11,14 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface LoginResponse {
+  user: UserInterface;
+  token: string;
+}
+
 export default async function login(
   req: NextApiRequest,
-  res: NextApiResponse<{ user: UserInterface; token: string } | string>
+  res: NextApiResponse<LoginResponse | string>
 ) {
   // usernames are case sensitive
   const { username, password }: LoginRequest = req.body;

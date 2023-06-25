@@ -1,10 +1,9 @@
-import { LoginRequest } from "@/pages/auth/login";
+// import { LoginRequest } from "@/pages/auth/login";
+import { LoginRequest } from "@/pages/api/auth/login";
 import http from "../hooks/useHttp";
 import {
   Course,
   UserInterface,
-  Record,
-  RecordWithSemester,
 } from "../interfaces/UserInterface";
 
 export interface RecordRequest {
@@ -21,20 +20,20 @@ export interface UserDetails {
 class ClientService {
   static get api() {
     return http({
-      baseURL: `${process.env.BASE_URL}/api/user`,
+      baseURL: `http://localhost:3000/api/user`,
     });
   }
 
   static getUser() {
-    return this.api.get<null, UserDetails>("/get_user");
+    return this.api.get<null, UserInterface | string>("/get_user");
   }
 
   static getRecords(payload: LoginRequest) {
-    return this.api.post<LoginRequest, Array<Record>>("/get_records", payload);
+    return this.api.post<LoginRequest>("/get_records", payload);
   }
 
   static getRecord(payload: RecordRequest) {
-    return this.api.post<RecordRequest, RecordWithSemester>(
+    return this.api.post<RecordRequest>(
       "/get_record",
       payload
     );

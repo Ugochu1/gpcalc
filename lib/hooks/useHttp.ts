@@ -10,6 +10,7 @@ function useHttp(httpProps: Pick<AxiosRequestConfig, "baseURL" | "headers">) {
     timeout: 120000,
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
       ...headers,
     },
   });
