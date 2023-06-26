@@ -1,0 +1,116 @@
+@import "../../style_variables/mixins";
+@import "../../style_variables/colors";
+
+.container {
+  @include websiteXPadding;
+  @include websiteYPadding;
+  @apply flex items-center justify-between;
+
+  .lgNav {
+    @apply lg:flex items-center justify-end gap-x-6 hidden;
+    color: $darkgray;
+    font-weight: 500;
+    @apply text-lg;
+
+    div {
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .dropdownButton {
+    @apply lg:hidden flex flex-col justify-between;
+    height: 20px;
+    width: 28px;
+    span {
+      display: block;
+      height: 3px;
+      border-radius: 5px;
+      width: 100%;
+      background: $darkgray;
+    }
+    .first {
+      &.active {
+        animation: openDropDown1 0.5s ease-in-out forwards;
+      }
+      &.inactive {
+        animation: closeDropDown1 0.5s ease-in-out;
+      }
+    }
+    .second {
+      transition: 0.25s ease-in-out;
+      &.active {
+        opacity: 0;
+      }
+      &.inactive {
+        opacity: 1;
+      }
+    }
+    .third {
+      &.active {
+        animation: openDropDown2 0.5s ease-in-out forwards;
+      }
+      &.inactive {
+        animation: closeDropDown2 0.5s ease-in-out forwards;
+      }
+    }
+  }
+}
+
+.smNav {
+  @apply flex flex-col items-start gap-4 sm:gap-5 text-lg lg:hidden;
+  @include websiteXPadding;
+  font-weight: 500;
+  color: $darkgray;
+  transition: max-height 500ms;
+  overflow: hidden;
+  
+}
+
+@keyframes openDropDown1 {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(8px) rotate(45deg);
+  }
+}
+
+@keyframes openDropDown2 {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+  100% {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
+
+@keyframes closeDropDown1 {
+  0% {
+    transform: translateY(8px) rotate(45deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes closeDropDown2 {
+  0% {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

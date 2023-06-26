@@ -1,0 +1,12 @@
+@import "../../style_variables/colors";
+
+.logo {
+  font-weight: 800;
+  @apply text-[1.65em];
+  .gp {
+    color: $blue;
+  }
+  .others {
+    color: $black;
+  }
+}
