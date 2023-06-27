@@ -10,7 +10,7 @@
     @apply lg:flex items-center justify-end gap-x-6 hidden;
     color: $darkgray;
     font-weight: 500;
-    @apply text-lg;
+    // @apply text-lg;
 
     div {
       &:hover {
@@ -22,6 +22,7 @@
     @apply lg:hidden flex flex-col justify-between;
     height: 20px;
     width: 28px;
+    cursor: pointer;
     span {
       display: block;
       height: 3px;
@@ -58,7 +59,7 @@
 }
 
 .smNav {
-  @apply flex flex-col items-start gap-4 sm:gap-5 text-lg lg:hidden;
+  @apply flex flex-col items-start gap-4 sm:gap-5 lg:hidden;
   @include websiteXPadding;
   font-weight: 500;
   color: $darkgray;

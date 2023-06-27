@@ -1,0 +1,54 @@
+@import "../../style_variables/colors";
+
+.button {
+  border: 1px solid $black;
+  font-size: 14px;
+  padding: 18px 35px;
+  border-radius: 50em;
+  background: $black;
+  color: $lightgray;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    .background {
+      animation: whiteEnter 0.2s linear forwards;
+    }
+    .main {
+      color: $black;
+    }
+  }
+  .background {
+    position: absolute;
+    z-index: 1;
+    background: white;
+    inset: 0;
+    border-radius: 50em;
+    transform: translateX(150px) translateY(70px);
+    animation: whiteLeave 0.2s linear forwards;
+  }
+  .main {
+    position: relative;
+    z-index: 2;
+    transition: .2s linear;
+  }
+}
+
+@keyframes whiteEnter {
+  from {
+    transform: translateX(0px) translateY(70px);
+  }
+  to {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+@keyframes whiteLeave {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX(0px) translateY(-70px);
+  }
+}
