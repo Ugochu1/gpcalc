@@ -1,0 +1,50 @@
+@import "../../style_variables/colors";
+
+.container {
+  width: 100%;
+  @apply aspect-[5.05/1] flex;
+  .box {
+    width: 20%;
+    aspect-ratio: 1/1;
+    display: flex;
+    .firstBox {
+      width: 50%;
+      background-color: $orange;
+      border-top-left-radius: 70em;
+      border-bottom-left-radius: 70em;
+    }
+    .secondBox {
+      width: 50%;
+      background-color: $lightorange;
+      border-top-left-radius: 70em;
+      border-bottom-left-radius: 70em;
+    }
+    .end {
+      width: 100%;
+      background-color: $pink;
+      border-top-right-radius: 70em;
+    }
+    .q {
+      width: 100%;
+      background-color: $blue;
+      border-top-right-radius: 70em;
+      border-top-left-radius: 70em;
+      border-bottom-left-radius: 70em;
+    }
+    .image1 {
+      border-radius: 50%;
+      width: 100%;
+      background: url("https://assets.website-files.com/6446f1470817dc9f3556628a/6453f030bc59ac13b19f946e_hero-image-01.png"),
+        $pink;
+      background-size: cover;
+      background-position: center center;
+    }
+    .image2 {
+      border-radius: 50%;
+      width: 100%;
+      background: url("https://assets.website-files.com/6446f1470817dc9f3556628a/6453f11ddf57eb0eb8471667_hero-image-02.png"), $lightorange;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+}

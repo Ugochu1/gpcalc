@@ -4,7 +4,7 @@
 .page_wrapper {
   .landing {
     @include websiteXPadding;
-    @apply xs:py-16 py-14 flex flex-wrap items-end justify-between;
+    @apply xs:pt-16 pt-14 xs:pb-24 pb-16 flex flex-wrap items-end justify-between;
     .text {
       @apply w-full md:max-w-[500px] sm:max-w-[450px] xs:max-w-[470px];
       p {
@@ -17,7 +17,7 @@
       }
     }
     .buttons {
-      @apply mt-10 flex flex-wrap items-center gap-5;
+      @apply mt-10 flex flex-wrap items-center gap-5 xs:pr-10 lg:pr-16;
       .aboutbutton {
         cursor: pointer;
         @apply flex items-center gap-x-3;
@@ -29,6 +29,61 @@
           border-radius: 50%;
           background-color: $blue;
           transition: .2s linear;
+        }
+      }
+    }
+  }
+  .progress {
+    position: relative;
+    // width: 100%;
+    @apply xl:aspect-[14/1] sm:aspect-[13/1] aspect-[9/1] md:my-24 my-16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include websiteXMargin;
+    .progressText {
+      @apply text-base xs:text-lg md:text-xl lg:text-2xl xl:text-3xl;
+      color: $black;
+    }
+    .rocket {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
+      color: $black;
+      transition: .05s linear;
+      right: 0;
+      background-color: $background;
+    }
+  }
+  .whatweoffer {
+    @include websiteXPadding;
+    .header {
+      @apply md:text-6xl xs:text-5xl text-4xl;
+      @apply md:pb-20 xs:pb-16 pb-14;
+      color: $black;
+    }
+    .body {
+      @apply flex flex-wrap md:gap-x-5 md:gap-y-8 gap-y-14;
+      .service {
+        @apply lg:max-w-[48.9%] md:max-w-[48.2%] max-w-full;
+        @apply lg:px-7 md:py-10 md:px-5 ;
+        // background: white;
+        align-self: flex-start;
+        &:nth-child(odd) {
+          @apply md:pl-0;
+        }
+        h1 {
+          @apply xl:text-4xl lg:text-3xl md:text-2xl xs:text-3xl text-2xl;
+          @apply lg:mb-12 xs:mb-10 mb-6;
+          color: $black;
+        }
+        p {
+          @apply xl:text-xl xl:leading-8 lg:text-lg md:text-base sm:text-lg sm:leading-8 leading-7;
+          color: $black;
         }
       }
     }

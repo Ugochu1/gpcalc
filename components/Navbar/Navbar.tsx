@@ -3,29 +3,16 @@ import styles from "./Navbar.module.scss";
 import Logo from "../logo/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useScreenSize from "@/hooks/useScreenSize";
 
 const Navbar: FC = () => {
   const [dropped, setDropped] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
+  useScreenSize(true);
 
   useEffect(() => {
     dropdownRef.current && setHeight(dropdownRef.current.scrollHeight);
-  }, []);
-
-  useEffect(() => {
-    let previousWidth = window.innerWidth; // get previous width
-    let timeout: NodeJS.Timeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const currentWidth = window.innerWidth;
-        if (previousWidth >= 1024 && currentWidth < 1024) {
-          router.reload();
-        }
-      }, 200);
-    });
   }, []);
 
   function toggle() {
@@ -44,6 +31,9 @@ const Navbar: FC = () => {
           </Link>
           <Link href="">
             <div>Dashboard</div>
+          </Link>
+          <Link href="">
+            <div>Calculate Now!</div>
           </Link>
           <Link href="">
             <div>Login</div>
@@ -79,6 +69,9 @@ const Navbar: FC = () => {
         </Link>
         <Link href="">
           <div>Dashboard</div>
+        </Link>
+        <Link href="">
+          <div>Calculate Now!</div>
         </Link>
         <Link href="">
           <div className="pb-7">Login</div>

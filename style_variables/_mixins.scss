@@ -5,3 +5,7 @@
 @mixin websiteXPadding {
   @apply md:px-12 sm:px-8 px-6;
 }
+
+@mixin websiteXMargin {
+  @apply md:mx-12 sm:mx-8 mx-6;
+}
