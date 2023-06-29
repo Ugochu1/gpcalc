@@ -1,0 +1,15 @@
+@import "../../style_variables/mixins";
+@import "../../style_variables/colors";
+
+.main {
+  background-color: $black;
+  padding: 40px 0;
+  
+  @include websiteXPadding;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+}

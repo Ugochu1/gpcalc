@@ -2,18 +2,20 @@
 
 .button {
   border: 1px solid $black;
+  align-self: flex-start;
   font-size: 14px;
   padding: 18px 35px;
   border-radius: 50em;
   background: $black;
-  color: $lightgray;
+  color: white;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  @apply hidden lg:block;
   
   &:hover {
     .background {
-      animation: whiteEnter 0.2s linear forwards;
+      animation: whiteEnter 0.3s ease-in-out forwards;
     }
     .main {
       color: $black;
@@ -26,7 +28,7 @@
     inset: 0;
     border-radius: 50em;
     transform: translateX(150px) translateY(70px);
-    animation: whiteLeave 0.2s linear forwards;
+    animation: whiteLeave 0.3s ease-in-out forwards;
   }
   .main {
     position: relative;
@@ -50,5 +52,22 @@
   }
   to {
     transform: translateX(0px) translateY(-70px);
+  }
+}
+
+.buttonWithoutAnim {
+  border: 1px solid $black;
+  font-size: 14px;
+  padding: 18px 35px;
+  border-radius: 50em;
+  background-color: $black;
+  align-self: flex-start;
+  color: white;
+  cursor: pointer;
+  opacity: 1;
+  transition: .1s ease-in-out;
+  @apply lg:hidden;
+  &:hover {
+    opacity: .7;
   }
 }

@@ -2,15 +2,19 @@ import { FC } from "react";
 import styles from "./Logo.module.scss";
 import Link from "next/link";
 
-const Logo: FC = () => {
+interface LogoProps {
+  white?: boolean
+}
+
+const Logo: FC<LogoProps> = ({white}) => {
   return (
     <Link href="/">
       <span className={styles.logo}>
         <span className={styles.gp}>GP</span>
-        <span className={styles.others}>c</span>
-        <span className={styles.others}>a</span>
-        <span className={styles.others}>l</span>
-        <span className={styles.others}>c.</span>
+        <span className={white ? "text-white": "text-[#1d2332]"}>c</span>
+        <span className={white ? "text-white": "text-[#1d2332]"}>a</span>
+        <span className={white ? "text-white": "text-[#1d2332]"}>l</span>
+        <span className={white ? "text-white": "text-[#1d2332]"}>c.</span>
       </span>
     </Link>
   );

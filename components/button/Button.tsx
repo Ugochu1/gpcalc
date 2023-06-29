@@ -7,12 +7,13 @@ type ButtonProps = {
 
 const Button: FC<ButtonProps> = ({ children }) => {
   return (
-    <div className={styles.button}>
-      <div
-        className={styles.background}
-      ></div>
-      <div className={styles.main}>{children}</div>
-    </div>
+    <>
+      <div className={styles.button}>
+        <div className={styles.background}></div>
+        <div className={styles.main}>{children}</div>
+      </div>
+      <button className={styles.buttonWithoutAnim}>{children}</button>
+    </>
   );
 };
 

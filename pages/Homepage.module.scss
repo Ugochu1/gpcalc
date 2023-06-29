@@ -17,7 +17,7 @@
       }
     }
     .buttons {
-      @apply mt-10 flex flex-wrap items-center gap-5 xs:pr-10 lg:pr-16;
+      @apply mt-10 flex xs:flex-row flex-wrap flex-col xs:items-center  gap-5 pr-10 lg:pr-16;
       .aboutbutton {
         cursor: pointer;
         @apply flex items-center gap-x-3;
@@ -28,7 +28,7 @@
           padding: 14px;
           border-radius: 50%;
           background-color: $blue;
-          transition: .2s linear;
+          transition: 0.2s linear;
         }
       }
     }
@@ -36,13 +36,13 @@
   .progress {
     position: relative;
     // width: 100%;
-    @apply xl:aspect-[14/1] sm:aspect-[13/1] aspect-[9/1] md:my-24 my-16;
+    @apply xl:aspect-[14/1] sm:aspect-[13/1] aspect-[9/1] md:my-24 lg:my-28 my-20;
     display: flex;
     align-items: center;
     justify-content: center;
     @include websiteXMargin;
     .progressText {
-      @apply text-base xs:text-lg md:text-xl lg:text-2xl xl:text-3xl;
+      @apply text-base xs:text-lg md:text-xl lg:text-2xl;
       color: $black;
     }
     .rocket {
@@ -52,9 +52,9 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
+      @apply text-4xl md:text-5xl lg:text-6xl;
       color: $black;
-      transition: .05s linear;
+      transition: 0.05s linear;
       right: 0;
       background-color: $background;
     }
@@ -62,28 +62,89 @@
   .whatweoffer {
     @include websiteXPadding;
     .header {
-      @apply md:text-6xl xs:text-5xl text-4xl;
+      @apply lg:text-6xl xs:text-5xl text-4xl;
       @apply md:pb-20 xs:pb-16 pb-14;
       color: $black;
     }
     .body {
       @apply flex flex-wrap md:gap-x-5 md:gap-y-8 gap-y-14;
       .service {
-        @apply lg:max-w-[48.9%] md:max-w-[48.2%] max-w-full;
-        @apply lg:px-7 md:py-10 md:px-5 ;
+        @apply xl:max-w-[31.8%] md:max-w-[48.2%] max-w-full flex flex-col items-start;
+        @apply lg:px-7 md:py-10 md:px-5;
         // background: white;
         align-self: flex-start;
-        &:nth-child(odd) {
-          @apply md:pl-0;
+        .icon {
+          background-color: $blue;
+          @apply xl:text-6xl xl:p-6 lg:text-5xl lg:p-5 xs:text-4xl xs:p-5 text-3xl p-4;
+          border-radius: 50%;
+          @apply md:self-center;
         }
         h1 {
-          @apply xl:text-4xl lg:text-3xl md:text-2xl xs:text-3xl text-2xl;
-          @apply lg:mb-12 xs:mb-10 mb-6;
           color: $black;
+          text-align: center;
+          font-weight: 700;
+          @apply md:self-center;
+          @apply xl:mt-14 lg:mb-10 lg:mt-10 md:my-8 xs:my-8 my-6;
+          @apply lg:text-[2em] md:text-[1.8em] xs:text-3xl text-2xl;
         }
         p {
-          @apply xl:text-xl xl:leading-8 lg:text-lg md:text-base sm:text-lg sm:leading-8 leading-7;
+          @apply md:text-[14px] lg:text-base text-[14px] xs:text-base;
+          @include websiteParagraphSpacing;
+          // color: $darkgray;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  .how_we_work {
+    background: white;
+    @include websiteXPadding;
+    @apply md:py-28 py-20;
+    @apply md:mt-20 mt-16;
+    .header {
+      @apply flex flex-wrap gap-x-20 gap-y-5 justify-between items-end;
+
+      .text {
+        @apply w-full md:max-w-[500px] sm:max-w-[450px] xs:max-w-[470px];
+
+        .subheader {
+          font-size: 15px;
+          color: $green;
+        }
+        .mainheader {
+          @apply lg:text-6xl xs:text-5xl text-4xl;
+          @apply sm:pt-10 pt-7;
           color: $black;
+        }
+      }
+    }
+    .mainsection {
+      @apply my-12 flex items-center flex-wrap justify-between;
+      .bgImage {
+        background: url("https://assets.website-files.com/6446f1470817dc9f3556628a/64637dea36dc25fe7293396b_image-09.png"),
+          $lightorange;
+        background-size: cover;
+        background-position: center center;
+        @apply w-full xl:w-[40%] lg:w-[44%] md:w-[46.4%];
+        @apply xl:aspect-[1/1.1] lg:aspect-[1/1.3] md:aspect-[1/1.3] aspect-[1/1];
+        border-top-right-radius: 50%;
+      }
+      .steps {
+        @apply md:max-w-[51%] xl:max-w-[46%] w-full flex flex-col lg:gap-10 md:gap-5 gap-10 mt-12 md:mt-0;
+        .step {
+          @apply flex flex-row lg:gap-5 md:gap-2 gap-4 lg:items-center items-start;
+          .icon {
+            @apply lg:text-3xl md:text-lg text-3xl;
+            @apply lg:p-5 md:p-3 p-2;
+            color: $lightorange;
+            background-color: $black;
+            border-radius: 50%;
+          }
+          .text {
+            font-weight: 400;
+            @include websiteParagraphSpacing;
+            @apply lg:text-base xl:text-lg md:text-[14px];
+          }
         }
       }
     }

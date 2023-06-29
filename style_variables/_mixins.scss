@@ -9,3 +9,7 @@
 @mixin websiteXMargin {
   @apply md:mx-12 sm:mx-8 mx-6;
 }
+
+@mixin websiteParagraphSpacing {
+  @apply xl:leading-8 leading-7;
+}
