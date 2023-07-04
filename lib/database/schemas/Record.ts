@@ -12,6 +12,8 @@ const recordSchema = new mongoose.Schema<MainRecord>({
     },
   ],
   gpa: String,
+  record_no: Number,
 });
 
-export const Record = mongoose.models.Record || mongoose.model("Record", recordSchema);
+export const Record =
+  mongoose.models.Record || mongoose.model("Record", recordSchema);

@@ -1,7 +1,6 @@
 import protect_route from "@/function_modules/protect_route";
 import tryCatch from "@/function_modules/tryCatch";
 import { NextApiRequest, NextApiResponse } from "next";
-import { PreviewRecord } from "@/lib/interfaces/UserInterface";
 import { Record } from "@/lib/database/schemas/Record";
 import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import dbConnect from "@/lib/database/mongodb";
@@ -17,7 +16,7 @@ export default async function initialize(
     if (!accessStatus.approved) {
       return accessStatus.message;
     }
-    const { title }: Pick<PreviewRecord, "title"> = req.body;
+    const { title, record_no }: Pick<MainRecord, "title" | "record_no" > = req.body;
     return tryCatch(async () => {
       const found = await Record.exists({ title });
       if (found) {
@@ -29,6 +28,7 @@ export default async function initialize(
         lastModified: new Date(),
         gpa: "",
         records: [],
+        record_no
       });
       // console.log(record);
       await record.save();

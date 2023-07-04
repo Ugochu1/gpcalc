@@ -13,3 +13,7 @@
 @mixin websiteParagraphSpacing {
   @apply xl:leading-8 leading-7;
 }
+
+@mixin mainSectionYPadding {
+  padding: 30px 0;
+}

@@ -1,0 +1,15 @@
+@import "../../style_variables/colors";
+
+.form {
+  @apply p-5 shadow-sm;
+  background-color: white;
+  border-radius: 8px;
+  @apply flex flex-col gap-5;
+  
+  button {
+    background: $blue;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+  }
+}

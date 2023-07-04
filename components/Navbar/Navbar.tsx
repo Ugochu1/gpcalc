@@ -4,6 +4,7 @@ import Logo from "../logo/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useScreenSize from "@/hooks/useScreenSize";
+import DropDownBtn from "../dropdownButton";
 
 const Navbar: FC = () => {
   const [dropped, setDropped] = useState<boolean>(false);
@@ -26,35 +27,21 @@ const Navbar: FC = () => {
           <Logo />
         </div>
         <div className={styles.lgNav}>
-          <Link href="">
+          <Link href="/">
             <div>Home</div>
           </Link>
-          <Link href="">
+          <Link href="/dashboard">
             <div>Dashboard</div>
           </Link>
-          <Link href="">
+          <Link href="/dashboard/calculate">
             <div>Calculate Now!</div>
           </Link>
-          <Link href="">
-            <div>Login</div>
+          <Link href="/auth/login">
+            <div>Sign In</div>
           </Link>
         </div>
-        <div className={styles.dropdownButton} onClick={toggle}>
-          <span
-            className={`${styles.first} ${
-              dropped ? styles.active : styles.inactive
-            }`}
-          ></span>
-          <span
-            className={`${styles.second} ${
-              dropped ? styles.active : styles.inactive
-            }`}
-          ></span>
-          <span
-            className={`${styles.third} ${
-              dropped ? styles.active : styles.inactive
-            }`}
-          ></span>
+        <div className="lg:hidden">
+          <DropDownBtn toggle={toggle} dropped={dropped} />
         </div>
       </div>
       <div
@@ -64,17 +51,17 @@ const Navbar: FC = () => {
           maxHeight: `${dropped ? height : 0}px`,
         }}
       >
-        <Link href="">
+        <Link href="/">
           <div>Home</div>
         </Link>
-        <Link href="">
+        <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
-        <Link href="">
+        <Link href="/dashboard/calculate">
           <div>Calculate Now!</div>
         </Link>
-        <Link href="">
-          <div className="pb-7">Login</div>
+        <Link href="/auth/login">
+          <div className="pb-7">Sign In</div>
         </Link>
       </div>
     </>

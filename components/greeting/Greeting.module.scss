@@ -1,0 +1,16 @@
+@import "../../style_variables/colors";
+
+.greeting {
+  @apply flex justify-between gap-x-20 gap-y-3 items-start flex-wrap;
+  .hello {
+    .hey {
+      @apply lg:text-4xl xs:text-3xl text-2xl;
+      color: $black;
+    }
+  }
+  .date {
+    @apply lg:text-lg;
+    font-weight: 500;
+    color: $darkgray;
+  }
+}

@@ -1,0 +1,65 @@
+@import "../../style_variables/colors";
+@import "../../style_variables/mixins";
+
+.page_wrapper {
+  
+  .infosection {
+    margin: 30px 0;
+    @apply flex gap-x-2 gap-y-3 xs:gap-5 flex-wrap items-start;
+    .info {
+      @apply xl:w-[31.6%] lg:w-[31.2%] md:w-[47.85%] sm:w-[31%] xs:w-[47.7%] w-[48.7%] shadow;
+      background-color: white;
+      border-radius: 6px;
+      @apply xl:p-5 md:p-6 p-5;
+      @apply lg:h-[150px] sm:h-[120px] h-[110px];
+      &:last-child {
+        @apply lg:flex-1 sm:flex-1 md:flex-none;
+      }
+      &:nth-child(2) {
+        @apply md:flex-1 lg:flex-none flex-1 sm:flex-none;
+      }
+      @apply flex flex-wrap;
+      color: $black;
+      &.main {
+        border: 1px solid $blue;
+        color: $blue;
+      }
+      .title {
+        width: 100%;
+        align-self: flex-start;
+        @apply text-xs md:text-sm;
+      }
+      .value {
+        align-self: flex-end;
+        width: 100%;
+        @apply text-5xl sm:text-6xl lg:text-7xl xl:text-8xl;
+      }
+    }
+  }
+  .recentActivity {
+    @apply pt-[30px] pb-[50px];
+    .activities {
+      @apply flex flex-wrap gap-5;
+      .recordList {
+        align-self: stretch;
+        @apply w-full lg:w-[59%];
+        .header {
+          @apply text-xs mb-4;
+        }
+      }
+      .newRecord {
+        flex: 1;
+        // background-color: green;
+        align-self: flex-start;
+        .header {
+          @apply text-xs mb-4;
+        }
+        .form {
+          @apply p-5;
+          background-color: white;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@import "../../style_variables/colors";
+@import "../../style_variables/mixins";
+
+.container {
+  @apply flex flex-col gap-3;
+  .empty {
+    @apply md:h-[200px] lg:h-[250px] h-[200px] flex flex-col items-center justify-center gap-3;
+    // background-color: white;
+    border-radius: 8px;
+    p {
+      @apply text-sm;
+      color: $black;
+    }
+    span {
+      @apply text-8xl;
+      color: $blue;
+    }
+  }
+  .record {
+    @apply flex flex-wrap justify-between gap-x-10 gap-y-1;
+    @apply p-5 shadow-sm;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: $lightgray;
+    }
+    .title {
+      // text-transform: uppercase;
+      // @apply xs:text-lg;
+      // font-weight: 700;
+      color: $black;
+    }
+    .lastModified {
+      color: $black;
+    }
+    .recordNumber {
+      color: $black;
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import "../../../style_variables/colors";
+@import "../../../style_variables/mixins";
+
+.container {
+  .main {
+    @include mainSectionYPadding;
+  }
+}

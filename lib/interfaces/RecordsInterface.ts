@@ -5,4 +5,5 @@ export interface MainRecord {
   lastModified: Date;
   gpa: string;
   records: Course[];
+  record_no: number;
 }
