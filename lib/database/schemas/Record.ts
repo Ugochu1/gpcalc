@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 
 const recordSchema = new mongoose.Schema<MainRecord>({
   title: { type: String, lowercase: true },
+  user: String,
   lastModified: Date,
   records: [
     {

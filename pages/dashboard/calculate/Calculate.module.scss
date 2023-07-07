@@ -4,5 +4,41 @@
 .container {
   .main {
     @include mainSectionYPadding;
+    .select {
+      @apply lg:w-[400px] xs:w-[300px];
+      .parent {
+        position: relative;
+        background: #000;
+        display: flex;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 1px solid $blue;
+        color: $blue;
+        font-size: 14px;
+        margin-top: 10px;
+        select {
+          width: 100%;
+          padding: 10px 15px;
+          appearance: none;
+          outline: none;
+          cursor: pointer;
+        }
+        div {
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: white;
+          position: absolute;
+          right: 0;
+          height: 100%;
+          padding: 0 5px;
+          transition: 200ms ease-in-out;
+          &.dropped {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
   }
 }

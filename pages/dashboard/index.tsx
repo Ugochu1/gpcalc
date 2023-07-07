@@ -5,81 +5,100 @@ import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import RecordPreview from "@/components/recordPreview/RecordPreview";
 import CreateRecord from "@/components/createRecord/CreateRecord";
 import Greeting from "@/components/greeting/Greeting";
+import { useAuthContext } from "@/lib/contexts/AuthContext";
+import withSession from "@/lib/hooks/withSession";
+import ClientService from "@/lib/services/client";
+import { useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-const dummyRecordData: MainRecord[] = [
-  // {
-  //   title: "1st Year First Semester",
-  //   lastModified: new Date("5 June 2023"),
-  //   records: [],
-  //   gpa: "",
-  //   record_no: 10
-  // },
-  // {
-  //   title: "1st Year Second Semester",
-  //   lastModified: new Date("22 September 2022"),
-  //   records: [],
-  //   gpa: "",
-  //   record_no: 10
-  // },
-  // {
-  //   title: "2nd Year First Semester",
-  //   lastModified: new Date("23 January 2023"),
-  //   records: [],
-  //   gpa: "",
-  //   record_no: 10
-  // },
-];
+interface Info {
+  title: string;
+  value: string;
+}
 
-const info: { title: string; value: string }[] = [
-  {
-    title: "Total Records",
-    value: "10",
-  },
-  {
-    title: "Growth Rate",
-    value: ".06",
-  },
-  {
-    title: "Incomplete records",
-    value: "4",
-  },
-];
+interface RecordContext {
+  record: MainRecord[];
+  setRecord: (record: MainRecord[]) => void;
+}
 
-const DashboardHome: NextPageWithLayout = () => {
+const RecordContext = createContext<RecordContext>({
+  record: [],
+  setRecord: () => null,
+});
+
+const DashboardHome: NextPageWithLayout<{ records: MainRecord[] }> = ({
+  records,
+}) => {
+  const { user } = useAuthContext();
+  const [record, setRecord] = useState<MainRecord[]>([...records]);
+
+  const context: RecordContext = {
+    record,
+    setRecord,
+  };
+
+  const getAverageRecordNo = () => {
+    let total: number = 0;
+    record.map((record, index) => (total += record.records.length));
+    return record.length === 0 ? 0 : total / record.length;
+  };
+
+  const getIncomplete = () => {
+    let total: number = 0;
+    record.map((record) => record.records.length < record.record_no && total++);
+    return total;
+  };
+
   return (
-    <div className={styles.page_wrapper}>
-      <Greeting header="Welcome back, Yugee!" />
-      <div className={styles.infosection}>
-        {info.map((info, index) => (
-          <div
-            className={`${styles.info} ${
-              info.title === "Total Records" && styles.main
-            }`}
-            key={index}
-          >
-            <p className={styles.title}>{info.title}</p>
-            <p className={styles.value}>{info.value}</p>
+    <RecordContext.Provider value={context}>
+      <div className={styles.page_wrapper}>
+        <Greeting header={"Welcome back, " + user?.firstname} />
+        <div className={styles.infosection}>
+          <div className={`${styles.info} ${styles.main}`}>
+            <p className={styles.title}>Total Records</p>
+            <p className={styles.value}>{record.length.toString()}</p>
           </div>
-        ))}
-      </div>
-      <div className={styles.recentActivity}>
-        <div className={styles.activities}>
-          <div className={styles.recordList}>
-            <p className={styles.header}>Recent Activity</p>
-            <RecordPreview record={dummyRecordData} />
+          <div className={`${styles.info}`}>
+            <p className={styles.title}>Average Record No</p>
+            <p className={styles.value}>{getAverageRecordNo().toString()}</p>
           </div>
-          <div className={styles.newRecord}>
-            <p className={styles.header}>Create Record</p>
-            <CreateRecord />
+          <div className={`${styles.info}`}>
+            <p className={styles.title}>Incomplete records</p>
+            <p className={styles.value}>{getIncomplete().toString()}</p>
+          </div>
+        </div>
+        <div className={styles.recentActivity}>
+          <div className={styles.activities}>
+            <div className={styles.recordList}>
+              <p className={styles.header}>Recent Activity</p>
+              <RecordPreview />
+            </div>
+            <div className={styles.newRecord}>
+              {/* {JSON.stringify(record)} */}
+              <p className={styles.header}>Create Record</p>
+              <CreateRecord />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </RecordContext.Provider>
   );
 };
 
 DashboardHome.getLayout = function (page) {
   return <DashboardLayout>{page}</DashboardLayout>;
 };
+
+export function useRecordContext() {
+  return useContext(RecordContext);
+}
+
+export const getServerSideProps = withSession(async (context, config) => {
+  let records = await ClientService.getServerRecords(config);
+  // console.log(records)
+  return {
+    records,
+  };
+});
 
 export default DashboardHome;

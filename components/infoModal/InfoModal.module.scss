@@ -1,0 +1,62 @@
+@import "../../style_variables/colors";
+@import "../../style_variables/mixins";
+
+.overlay {
+  position: fixed;
+  z-index: 99;
+  background: black;
+  inset: 0;
+  opacity: 0.1;
+  display: none;
+  &.show {
+    display: block;
+  }
+}
+
+.modal {
+  background: white;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  @apply xs:w-[400px] w-[90%] shadow;
+  @apply p-5;
+  border-radius: 8px;
+  display: none;
+  // transition: .2s ease-in;
+  &.show {
+    display: block;
+  }
+  // @include websiteXMargin;
+
+  .header {
+    @apply text-xl;
+    color: $black;
+    font-weight: 800;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+  }
+
+  .body {
+    padding: 15px 0;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 2px 0 5px 0;
+    button {
+      margin: 0 auto;
+      display: block;
+      font-size: 15px;
+      background-color: $red;
+      padding: 5px 20px;
+      border-radius: 50em;
+      color: white;
+    }
+  }
+}

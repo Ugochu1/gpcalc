@@ -1,5 +1,5 @@
-const ACCESS_TOKEN_KEY = "sdlfkj33r9uefrlkjed";
-const AUTH_COOKIE = "gp-calc";
+export const ACCESS_TOKEN_KEY = "873ue874834eu927382";
+export const AUTH_COOKIE = "sana-user-session";
 
 interface CookieItem {
   key: string;
@@ -7,30 +7,36 @@ interface CookieItem {
   expiry?: Date;
 }
 
-class StorageService {
+class Storage {
   static get storage() {
     return document.cookie;
   }
-
+  
   static setItem(item: CookieItem) {
     const { key, value, expiry } = item;
-    return (document.cookie = `${key}=${value};expires=${expiry}`);
+    return (document.cookie = `${key}=${value};expires=${expiry};path=/`);
   }
 
   static getItem(key: string) {
-    let decodedCookie = decodeURIComponent(this.storage);
-    let cookies = decodedCookie
+    const decodedCookie = decodeURIComponent(this.storage);
+    const cookies: Array<{ key: string; value: string }> = decodedCookie
       .split(";")
-      .map((cookie) => {
-        let [key, value] = cookie.split("=");
+      .map((cookieString) => {
+        const key = cookieString.split("=")[0];
+        const value = cookieString.split("=")[1];
         return { key, value };
       })
       .filter((cookie) => cookie.key === key);
-    return cookies[0].value;
+    return cookies[0]?.value;
   }
 
   static removeItem(key: string) {
-    document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+    console.log(key);
+    document.cookie = `${key} = expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+
+  static getAccessToken() {
+    return this.getItem(ACCESS_TOKEN_KEY);
   }
 
   static setAccessToken(token: string) {
@@ -38,7 +44,7 @@ class StorageService {
     return this.setItem({
       key: ACCESS_TOKEN_KEY,
       value: token,
-      expiry: new Date(now.setDate(now.getDate() + 30)), // 30 days before logout.
+      expiry: new Date(now.setDate(now.getDate() + 30)),
     });
   }
 
@@ -46,5 +52,4 @@ class StorageService {
     return this.removeItem(ACCESS_TOKEN_KEY);
   }
 }
-
-export default StorageService;
+export default Storage;

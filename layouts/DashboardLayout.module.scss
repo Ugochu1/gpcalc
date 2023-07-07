@@ -7,13 +7,27 @@
     @include websiteYPadding;
     display: flex;
     align-items: center;
-    @apply md:justify-center justify-start;
+    @apply md:justify-end justify-between;
     background: white;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     @apply shadow gap-x-2 md:h-20;
+    .details {
+      @apply flex flex-col items-center justify-center;
+      div {
+        @apply p-2;
+        background: $blue;
+        color: white;
+        border-radius: 50%;
+      }
+      p {
+        color: $blue;
+        font-size: 13px;
+        text-transform: lowercase;
+      }
+    }
   }
   .absolute {
     position: fixed;
@@ -45,7 +59,7 @@
         @apply pt-8 md:pt-6;
       }
       .links {
-        @apply pt-20;
+        @apply pt-24;
       }
       transition: 0.5s ease-in-out;
 
@@ -73,7 +87,7 @@
       font-weight: 600;
       width: 100%;
       @include websiteXPadding;
-      @apply md:pt-32 pt-24;
+      @apply pt-32;
       
     }
   }

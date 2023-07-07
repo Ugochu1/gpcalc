@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     return new Promise(async (resolve, reject) => {
       try {
         let response = await ClientService.getUser();
-        console.log(response);
+        // console.log(response);
         if (typeof response !== "string") {
           setUser(response);
           resolve(response);
@@ -49,7 +49,8 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     const protectRoute = async () => {
       // check if it is an auth route
       const isAuthRoute = router.pathname.split("/")[1] === "auth";
-      if (!isAuthRoute && !user) {
+      const isHomePage = router.pathname === "/" || router.pathname === ""
+      if (!isAuthRoute && !isHomePage && !user) {
         try {
           await fetchUser();
         } catch (err) {

@@ -13,12 +13,14 @@ export interface Response {
 
 export default function protect_route(req: NextApiRequest) {
   const token: AuthorizationHeader = req.headers.authorization?.split(" ")[1];
+  // console.log(token)
 
   const verified = jwtVerify(token as string) as Verified;
 
   let response: Response;
 
   if (!token || verified.message) {
+    console.log("Cannot pass")
     response = { approved: false, message: verified.message };
   } else {
     response = { approved: true, _id: verified.payload };

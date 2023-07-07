@@ -20,8 +20,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <main className={plus_jarkata.className}>
-      {/* <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider> */}
-      {getLayout(<Component {...pageProps} />)}
+      <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
     </main>
   );
 }

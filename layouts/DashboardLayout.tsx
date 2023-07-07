@@ -6,11 +6,13 @@ import {
   BsFillPersonFill,
   BsFolderFill,
   BsFillCalculatorFill,
+  BsPerson,
 } from "react-icons/bs";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 import { useRouter } from "next/router";
 import DropDownBtn from "@/components/dropdownButton";
+import { useAuthContext } from "@/lib/contexts/AuthContext";
 
 type DashboardLayoutProps = {
   header?: string;
@@ -21,6 +23,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [currentRoute, setCurrentRoute] = useState<string>("");
   const [dropped, setDropped] = useState<boolean>(false);
   const router = useRouter();
+  const { user } = useAuthContext();
 
   const toggle = () => {
     setDropped(true);
@@ -48,6 +51,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         ></div>
         <div className={styles.header}>
           <DropDownBtn dropped={dropped} toggle={toggle} />
+          <div className={styles.details}>
+            <div>
+              <BsPerson />
+            </div>
+            <p>@{user?.username}</p>
+          </div>
         </div>
         <div className={styles.mainContainer}>
           <div className={`${styles.controls} ${dropped && styles.active}`}>

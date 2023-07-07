@@ -7,14 +7,7 @@ const userSchema = new mongoose.Schema<UserInterface>({
   lastname: { type: String, lowercase: true },
   username: { type: String, unique: true },
   password: String,
-  createdAt: Date,
-  records: [
-    {
-      id: String,
-      title: { type: String, lowercase: true },
-      lastModified: Date
-    },
-  ],
+  createdAt: Date
 });
 
 // create a model

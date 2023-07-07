@@ -5,11 +5,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useScreenSize from "@/hooks/useScreenSize";
 import DropDownBtn from "../dropdownButton";
+import { useAuthContext } from "@/lib/contexts/AuthContext";
 
 const Navbar: FC = () => {
   const [dropped, setDropped] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const {user} = useAuthContext();
+
   useScreenSize(true);
 
   useEffect(() => {
@@ -36,9 +39,9 @@ const Navbar: FC = () => {
           <Link href="/dashboard/calculate">
             <div>Calculate Now!</div>
           </Link>
-          <Link href="/auth/login">
+          {!user && <Link href="/auth/login">
             <div>Sign In</div>
-          </Link>
+          </Link>}
         </div>
         <div className="lg:hidden">
           <DropDownBtn toggle={toggle} dropped={dropped} />
@@ -60,9 +63,9 @@ const Navbar: FC = () => {
         <Link href="/dashboard/calculate">
           <div>Calculate Now!</div>
         </Link>
-        <Link href="/auth/login">
+        {!user && <Link href="/auth/login">
           <div className="pb-7">Sign In</div>
-        </Link>
+        </Link>}
       </div>
     </>
   );

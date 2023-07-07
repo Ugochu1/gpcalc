@@ -6,6 +6,7 @@
     .hey {
       @apply lg:text-4xl xs:text-3xl text-2xl;
       color: $black;
+      text-transform: capitalize;
     }
   }
   .date {
