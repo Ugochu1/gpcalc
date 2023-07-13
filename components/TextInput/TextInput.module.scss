@@ -1,9 +1,9 @@
 @import "../../style_variables/colors";
 
 .input {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-1;
   label {
-    font-size: 14px;
+    font-size: 13px;
     color: $black;
   }
   input {
@@ -13,6 +13,7 @@
     flex: 1;
     background-color: white;
     border: 1px solid lightgray;
+    font-size: 15px;
     &:focus {
       outline: none;
     }

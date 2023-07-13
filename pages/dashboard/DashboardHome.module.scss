@@ -39,7 +39,7 @@
   .recentActivity {
     @apply pt-[30px] pb-[50px];
     .activities {
-      @apply flex flex-wrap gap-5;
+      @apply flex flex-wrap gap-5 lg:flex-row flex-col-reverse;
       .recordList {
         align-self: stretch;
         @apply w-full lg:w-[59%];
@@ -49,6 +49,7 @@
       }
       .newRecord {
         flex: 1;
+        width: 100%;
         // background-color: green;
         align-self: flex-start;
         .header {

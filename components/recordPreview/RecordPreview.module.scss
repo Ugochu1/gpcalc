@@ -33,6 +33,7 @@
     }
     .lastModified {
       color: $black;
+      @apply text-sm;
     }
     .recordNumber {
       color: $black;

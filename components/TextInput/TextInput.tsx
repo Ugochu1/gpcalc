@@ -7,6 +7,8 @@ type TextInputType = {
   id?: string;
   label?: string;
   register?: object;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string;
 };
 
 const TextInput: FC<TextInputType> = (props) => {
@@ -18,7 +20,13 @@ const TextInput: FC<TextInputType> = (props) => {
 
       {props.type === "password" ? (
         <div className="flex">
-          <input id={props.id} type={visible ? "text" : "password"} {...props.register} />
+          <input
+            id={props.id}
+            type={visible ? "text" : "password"}
+            {...props.register}
+            onChange={props.onChange}
+            defaultValue={props.defaultValue}
+          />
           <div
             className="w-[10%] flex justify-center items-center text-2xl text-gray-800 cursor-pointer"
             onClick={() => setVisible((cv) => !cv)}
@@ -27,9 +35,14 @@ const TextInput: FC<TextInputType> = (props) => {
           </div>
         </div>
       ) : (
-        <input id={props.id} type={props.type} {...props.register} />
+        <input
+          id={props.id}
+          type={props.type}
+          {...props.register}
+          onChange={props.onChange}
+          defaultValue={props.defaultValue}
+        />
       )}
-
     </div>
   );
 };

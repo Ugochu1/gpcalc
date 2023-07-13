@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import InfoModal from "../infoModal/InfoModal";
 import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import ClientService from "@/lib/services/client";
-import { useRecordContext } from "@/pages/dashboard";
+import { RecordPreviewProps } from "../recordPreview/RecordPreview";
 
 type Inputs = {
   title: string;
@@ -17,9 +17,8 @@ export type CreateRecordInputs = {
   record_no: number;
 };
 
-const CreateRecord: FC = () => {
+const CreateRecord: FC<RecordPreviewProps> = ({record, setRecord}) => {
   const [show, setShow] = useState<boolean>(false);
-  const { record, setRecord } = useRecordContext();
 
   const {
     handleSubmit,
@@ -39,8 +38,9 @@ const CreateRecord: FC = () => {
     // call the initializing endpoint.
     const response = await ClientService.initializeRecord(_data);
     if (typeof response !== "string" && typeof response !== "boolean") {
-      setMyTitle(data.title);
-      setRecord([response.record, ...(record as MainRecord[])]);
+      setMyTitle(response.record.title)
+      setRecord && setRecord([response.record, ...(record as MainRecord[])]);
+      // setMyRecord([response.record, ...(record as MainRecord[])]);
     }
     setShow(true);
     reset();

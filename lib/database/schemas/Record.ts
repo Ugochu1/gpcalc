@@ -7,6 +7,7 @@ const recordSchema = new mongoose.Schema<MainRecord>({
   lastModified: Date,
   records: [
     {
+      id: String,
       name: { type: String, lowercase: true },
       grade: { type: String, uppercase: true },
       unit_load: Number,

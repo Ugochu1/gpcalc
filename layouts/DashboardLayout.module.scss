@@ -13,6 +13,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 2;
     @apply shadow gap-x-2 md:h-20;
     .details {
       @apply flex flex-col items-center justify-center;
@@ -76,8 +77,8 @@
         border-radius: 50em;
         font-size: 15px;
         &.active {
-          background-color: rgba(196, 196, 230, 0.658);
-          color: blue;
+          background-color: rgba(215, 215, 233, 0.658);
+          color: $blue;
         }
       }
     }

@@ -8,6 +8,7 @@
       @apply lg:w-[400px] xs:w-[300px];
       .parent {
         position: relative;
+        z-index: 1;
         background: #000;
         display: flex;
         overflow: hidden;
@@ -22,6 +23,7 @@
           appearance: none;
           outline: none;
           cursor: pointer;
+          text-transform: capitalize;
         }
         div {
           font-size: 30px;

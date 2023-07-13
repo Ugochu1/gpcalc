@@ -7,7 +7,7 @@ import { AxiosRequestConfig } from "axios";
 import { CreateRecordInputs } from "@/components/createRecord/CreateRecord";
 
 export interface RecordRequest {
-  title: string;
+  id: string;
 }
 
 export interface UserDetails {
@@ -20,6 +20,7 @@ export interface UserDetails {
 export interface GetProps {
   preview?: string;
   page_number?: string;
+  skip?: string;
 }
 
 class ClientService {
@@ -33,13 +34,19 @@ class ClientService {
     return this.api.get<null, UserInterface | string>("/get_user");
   }
 
-  static getRecords(preview?: boolean, page_number?: number) {
-    console.log("here");
-    return this.api.get<null, MainRecord[] | string>("/record/get_records");
+  static getRecords(options?: GetProps) {
+    return this.api.get<
+      null,
+      { response: MainRecord[]; count: number } | string
+    >(
+      `/record/get_records?preview=${options?.preview}&page_number=${options?.page_number}&skip=${options?.skip}`
+    );
   }
 
   static getRecord(payload: RecordRequest) {
-    return this.api.post<RecordRequest>("/get_record", payload);
+    return this.api.get<null, MainRecord>(
+      "/record/get_record?id=" + payload.id
+    );
   }
 
   static initializeRecord(payload: CreateRecordInputs) {
@@ -50,10 +57,17 @@ class ClientService {
   }
 
   static calculateGPA(payload: Array<Course>) {
-    return this.api.post<Array<Course>, { gpa: number }>(
+    return this.api.post<Array<Course>, number | string>(
       "/calculate_gpa",
       payload
     );
+  }
+
+  static save(payload: Pick<MainRecord, "_id" | "records" | "gpa">) {
+    return this.api.post<
+      Pick<MainRecord, "_id" | "records" | "gpa">,
+      MainRecord
+    >("/record/save", payload);
   }
 
   // server requests go here
@@ -64,7 +78,10 @@ class ClientService {
   }
 
   static getServerRecords(config?: AxiosRequestConfig, options?: GetProps) {
-    return this.serverapi.get<null, MainRecord[] | string>(
+    return this.serverapi.get<
+      null,
+      { response: MainRecord[]; count: number } | string
+    >(
       `/record/get_records?preview=${options?.preview}&page_number=${options?.page_number}`,
       config
     );

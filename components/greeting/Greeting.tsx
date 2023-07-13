@@ -11,7 +11,7 @@ const Greeting: FC<GreetingProps> = ({ header }) => {
       <div className={styles.hello}>
         <p className={styles.hey}>{header}</p>
         <p className="font-light text-sm xs:text-base xs:mt-2 mt-1">
-          Page loaded at{" "}
+          Page updated at{" "}
           {new Date().toLocaleTimeString(undefined, {
             hour: "numeric",
             minute: "2-digit",

@@ -4,12 +4,9 @@ import { useEffect, useState } from "react";
 const useScreenSize = (reload?: boolean, callback?: () => void) => {
   const router = useRouter();
   const [screenSize, setScreenSize] = useState<number>(0);
-  
+
   useEffect(() => {
-    let previousWidth = window.innerWidth; // get previous width
-    setScreenSize(previousWidth);
-    let timeout: NodeJS.Timeout;
-    window.addEventListener("resize", () => {
+    function resizeWindow() {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         const currentWidth = window.innerWidth;
@@ -21,7 +18,14 @@ const useScreenSize = (reload?: boolean, callback?: () => void) => {
         callback && callback();
         setScreenSize(currentWidth);
       }, 200);
-    });
+    }
+
+    let previousWidth = window.innerWidth; // get previous width
+    setScreenSize(previousWidth);
+    let timeout: NodeJS.Timeout;
+    window.addEventListener("resize", resizeWindow);
+
+    return () => window.removeEventListener("resize", resizeWindow);
   }, []);
 
   return screenSize;

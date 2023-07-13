@@ -13,6 +13,7 @@ import { IoLogOut } from "react-icons/io5";
 import { useRouter } from "next/router";
 import DropDownBtn from "@/components/dropdownButton";
 import { useAuthContext } from "@/lib/contexts/AuthContext";
+import Storage from "@/lib/services/storage";
 
 type DashboardLayoutProps = {
   header?: string;
@@ -41,6 +42,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       setCurrentRoute("settings");
     }
   }, [router.pathname]);
+
+  const logOut = () => {
+    Storage.removeAccessToken();
+    router.replace("/auth/login")
+  }
 
   return (
     <>
@@ -100,14 +106,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className={styles.text}>Calculate GPA</div>
               </div>
             </Link>
-            <Link href="">
-              <div className={styles.link}>
-                <div className={styles.icon}>
-                  <IoLogOut />
-                </div>
-                <div className={styles.text}>Logout</div>
+            <div className={styles.link + " cursor-pointer"} onClick={logOut}>
+              <div className={styles.icon}>
+                <IoLogOut />
               </div>
-            </Link>
+              <div className={styles.text}>Logout</div>
+            </div>
           </div>
           <div className={styles.body}>{children}</div>
         </div>

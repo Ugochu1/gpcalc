@@ -1,0 +1,29 @@
+.recentActivity {
+  @apply pt-[30px] pb-[50px];
+  .activities {
+    @apply flex flex-wrap gap-5 flex-col-reverse lg:flex-row;
+    .recordList {
+      align-self: stretch;
+      @apply w-full lg:w-[59%];
+      .header {
+        @apply text-xs mb-4;
+      }
+    }
+    .newRecord {
+      flex: 1;
+      width: 100%;
+      // background-color: green;
+      align-self: flex-start;
+      @apply lg:sticky top-[100px];
+
+      .header {
+        @apply text-xs mb-4;
+      }
+      .form {
+        @apply p-5;
+        background-color: white;
+        border-radius: 8px;
+      }
+    }
+  }
+}

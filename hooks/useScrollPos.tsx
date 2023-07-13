@@ -4,9 +4,12 @@ const useScrollPos = () => {
   const [scrollPos, setScrollPos] = useState<number>(0);
 
   useEffect(() => {
-    document.addEventListener("scroll", () => {
+    function getScrollPosition() {
       setScrollPos(document.documentElement.scrollTop);
-    });
+    }
+
+    document.addEventListener("scroll", getScrollPosition);
+    return () => document.removeEventListener("scroll", getScrollPosition);
   }, []);
 
   return scrollPos;

@@ -2,6 +2,7 @@ export interface Course {
   name: string;
   grade: string;
   unit_load: number;
+  id: string;
 }
 
 export interface PreviewRecord {
