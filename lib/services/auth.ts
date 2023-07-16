@@ -1,8 +1,8 @@
-// import { LoginRequest, LoginResponse } from "@/pages/auth/login";
 import http from "../hooks/useHttp";
 import { SignupRequest } from "@/pages/api/auth/signup";
 import { UserDetails } from "./client";
 import { LoginRequest, LoginResponse } from "@/pages/api/auth/login";
+import { UserInterface } from "../interfaces/UserInterface";
 
 class AuthService {
   // instantiate the api
@@ -17,7 +17,7 @@ class AuthService {
   }
 
   static signup(payload: SignupRequest) {
-    return this.api.post<SignupRequest, { message: string }>(
+    return this.api.post<SignupRequest, UserInterface | string >(
       "/signup",
       payload
     );

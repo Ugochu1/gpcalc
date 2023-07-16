@@ -30,7 +30,7 @@ const DashboardHome: NextPageWithLayout<{ records: MainRecord[] }> = ({
 
   return (
     <div className={styles.page_wrapper}>
-      <Greeting header={"Welcome back, " + user?.firstname} />
+      <Greeting header={"Welcome, " + user?.firstname} />
       <div className={styles.infosection}>
         <div className={`${styles.info} ${styles.main}`}>
           <p className={styles.title}>Total Records</p>

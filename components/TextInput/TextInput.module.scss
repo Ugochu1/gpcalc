@@ -18,4 +18,15 @@
       outline: none;
     }
   }
+
+  .mainInput {
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 10px;
+    input {
+      border: none;
+      padding: 0px;
+    }
+  }
 }

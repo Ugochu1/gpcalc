@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import DropDownBtn from "@/components/dropdownButton";
 import { useAuthContext } from "@/lib/contexts/AuthContext";
 import Storage from "@/lib/services/storage";
+import PageLoader from "@/components/pageLoader/PageLoader";
+import { useNotificationContext } from "@/lib/contexts/NotificationContext";
 
 type DashboardLayoutProps = {
   header?: string;
@@ -24,7 +26,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [currentRoute, setCurrentRoute] = useState<string>("");
   const [dropped, setDropped] = useState<boolean>(false);
   const router = useRouter();
-  const { user } = useAuthContext();
+  const { user, setUser } = useAuthContext();
+  const { setShowNotification, setNotification } = useNotificationContext();
 
   const toggle = () => {
     setDropped(true);
@@ -45,12 +48,17 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const logOut = () => {
     Storage.removeAccessToken();
-    router.replace("/auth/login")
-  }
+    setUser(null);
+    router.replace("/auth/login");
+    setNotification("Logout successful");
+    setShowNotification(true);
+  };
 
   return (
     <>
       <div className={styles.mainlayout}>
+        <PageLoader />
+
         <div
           className={`${styles.absolute} ${dropped && styles.active}`}
           onClick={() => setDropped(false)}

@@ -19,16 +19,17 @@ const TextInput: FC<TextInputType> = (props) => {
       <label htmlFor={props.id}>{props.label}</label>
 
       {props.type === "password" ? (
-        <div className="flex">
+        <div className={styles.mainInput}>
           <input
             id={props.id}
             type={visible ? "text" : "password"}
             {...props.register}
             onChange={props.onChange}
             defaultValue={props.defaultValue}
+            className="flex-1"
           />
           <div
-            className="w-[10%] flex justify-center items-center text-2xl text-gray-800 cursor-pointer"
+            className="flex justify-center items-center text-2xl text-gray-800 cursor-pointer"
             onClick={() => setVisible((cv) => !cv)}
           >
             {visible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import AuthService from "@/lib/services/auth";
 import StorageService from "@/lib/services/storage";
 import { useAuthContext } from "@/lib/contexts/AuthContext";
+import { useState } from "react";
+import { useNotificationContext } from "@/lib/contexts/NotificationContext";
+import { Loading } from "@/components/pageLoader/PageLoader";
 
 type Inputs = {
   username: string;
@@ -22,6 +25,8 @@ const Login: NextPageWithLayout = () => {
   } = useForm<Inputs>();
   const router = useRouter();
   const { setUser } = useAuthContext();
+  const { setNotification, setShowNotification } = useNotificationContext();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onLogin = () => {
     const { ref } = router.query;
@@ -29,17 +34,21 @@ const Login: NextPageWithLayout = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
     const response = await AuthService.login(data);
     if (typeof response !== "string") {
       // set access token
       StorageService.setAccessToken(response.token);
       // set user context.
       setUser(response.user);
+      setNotification("Logged in successfully.");
       // call onLogin to redirect to last page.
       onLogin();
     } else {
-      console.log(response);
+      setNotification(response);
     }
+    setLoading(false);
+    setShowNotification(true);
   };
 
   return (
@@ -72,7 +81,7 @@ const Login: NextPageWithLayout = () => {
           <div className="text-xs text-right text-blue-600">
             Forgot Password?
           </div>
-          <button>Sign In</button>
+          <button>Sign In {loading && <Loading />}</button>
           <p className="text-sm">
             Don&apos;t have an account?{" "}
             <span className="text-blue-600 uppercase">

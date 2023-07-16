@@ -1,0 +1,22 @@
+@import "../../style_variables/colors";
+
+.design {
+  position: fixed;
+  font-size: 14px;
+  right: 50%;
+  transform: translateX(50%);
+  @apply xs:min-w-[200px] xs:max-w-[350px] w-[95%];
+  line-height: 18px;
+  background-color: $pink;
+  padding: 0 20px 20px 20px;
+  border-radius: 20px;
+  z-index: 222;
+  // background-color: yellow;
+  transition: top .2s ease-in-out;
+  &.show {
+    top: 10px;
+  }
+  &.hide {
+    top: -100px;
+  }
+}

@@ -62,7 +62,7 @@
   .whatweoffer {
     @include websiteXPadding;
     .header {
-      @apply lg:text-6xl xs:text-5xl text-4xl;
+      @apply xs:text-5xl text-4xl;
       @apply md:pb-20 xs:pb-16 pb-14;
       color: $black;
     }

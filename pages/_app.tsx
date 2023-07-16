@@ -4,6 +4,7 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import NotificationProvider from "@/lib/contexts/NotificationContext";
 
 const plus_jarkata = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <main className={plus_jarkata.className}>
-      <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      <NotificationProvider>
+        <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      </NotificationProvider>
     </main>
   );
 }

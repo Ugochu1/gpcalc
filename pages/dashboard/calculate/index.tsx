@@ -3,18 +3,20 @@ import { NextPageWithLayout } from "@/pages/_app";
 import styles from "./Calculate.module.scss";
 import Greeting from "@/components/greeting/Greeting";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { AiFillDelete } from "react-icons/ai";
 import { useState, useEffect } from "react";
-import withSession from "@/lib/hooks/withSession";
 import ClientService from "@/lib/services/client";
 import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import { useRouter } from "next/router";
 import RecordWorkspace from "@/components/record_workspace/RecordWorkspace";
+import { useNotificationContext } from "@/lib/contexts/NotificationContext";
 
 const CalculateGPA: NextPageWithLayout = () => {
   const [dropped, setDropped] = useState(false);
   const [selected, setSelected] = useState<string>("none");
   const router = useRouter();
   const [record, setRecord] = useState<MainRecord>();
+  const { setNotification, setShowNotification } = useNotificationContext();
 
   useEffect(() => {
     const { selected = "none" } = router.query;
@@ -35,6 +37,21 @@ const CalculateGPA: NextPageWithLayout = () => {
 
     getRecord();
   }, [selected]);
+
+  async function deleteRecord() {
+    const response = await ClientService.delete(selected);
+    if (typeof response !== "string") {
+      if (response.acknowledged) {
+        setNotification(
+          "Successfully deleted record with id " + selected + "."
+        );
+        router.replace("/dashboard/records");
+      }
+    } else {
+      setNotification(response);
+    }
+    setShowNotification(true);
+  }
 
   return (
     <div className={styles.container}>
@@ -57,6 +74,17 @@ const CalculateGPA: NextPageWithLayout = () => {
             </div>
           </div>
         </div>
+        {selected !== "none" && (
+          <div
+            className="flex items-center gap-1 text-red-500 cursor-pointer"
+            onClick={deleteRecord}
+          >
+            <div>
+              <AiFillDelete />
+            </div>
+            <p className="text-sm">Delete Record</p>
+          </div>
+        )}
       </div>
       <div>
         <RecordWorkspace record={record as MainRecord} selected={selected} />

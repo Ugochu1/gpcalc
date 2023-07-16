@@ -62,7 +62,7 @@ const RecordWorkspace: FC<RecordWorkspaceProps> = ({ record, selected }) => {
   useEffect(() => {
     setRecords((record && record.records) || []);
     setRecordNo((record && record.record_no) || 10);
-    setGpa((record && parseInt(record.gpa)))
+    setGpa((record && parseFloat(record.gpa)))
   }, [record]);
 
   const clear = () => {
@@ -190,7 +190,7 @@ const RecordWorkspace: FC<RecordWorkspaceProps> = ({ record, selected }) => {
           )}
           {records.length > 1 && (
             <div className={styles.createButton} onClick={getGPA}>
-              Calculate and Save
+              Calculate {selected !== "none" && "and Save"}
             </div>
           )}
         </div>

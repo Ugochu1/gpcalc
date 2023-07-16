@@ -4,8 +4,10 @@
 .container {
   .main {
     @include mainSectionYPadding;
+    @apply flex flex-wrap justify-start items-end gap-5;
     .select {
       @apply lg:w-[400px] xs:w-[300px];
+
       .parent {
         position: relative;
         z-index: 1;

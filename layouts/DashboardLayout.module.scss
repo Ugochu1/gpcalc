@@ -88,7 +88,7 @@
       font-weight: 600;
       width: 100%;
       @include websiteXPadding;
-      @apply pt-32;
+      @apply pt-32 min-h-screen;
       
     }
   }

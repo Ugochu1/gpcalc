@@ -13,6 +13,7 @@ import { useState, useRef, useEffect } from "react";
 import useScreenSize from "@/hooks/useScreenSize";
 import useScrollPos from "@/hooks/useScrollPos";
 import Footer from "@/components/footer/Footer";
+import Link from "next/link";
 
 const iconStyle = {
   color: "white",
@@ -46,7 +47,9 @@ const Homepage: NextPageWithLayout = () => {
           <h1>Boring stuff is our forte.</h1>
         </div>
         <div className={styles.buttons}>
-          <Button>Get started</Button>
+          <Link href="/auth/signup">
+            <Button>Get started</Button>
+          </Link>
           <div className={styles.aboutbutton}>
             <div className={styles.button}>
               <HiDocumentText size={25} style={{ color: "white" }} />
@@ -124,7 +127,9 @@ const Homepage: NextPageWithLayout = () => {
             <p className={styles.mainheader}>How our platform works</p>
           </div>
           <div className={styles.button}>
-            <Button>Try us out today.</Button>
+            <Link href="/auth/signup">
+              <Button>Try us out today.</Button>
+            </Link>
           </div>
         </div>
         <div className={styles.mainsection}>

@@ -27,7 +27,7 @@ export default async function signup(
       });
       // console.log(user_exists)
       if (user_exists) {
-        return "This user already exists";
+        return "This username already exists";
       } else {
         const user = new User<UserInterface>({
           firstname,
@@ -35,7 +35,6 @@ export default async function signup(
           username,
           password: hash(password),
           createdAt: new Date(),
-          records: [],
         });
         await user.save(); // save the new user to the database.
         return user;

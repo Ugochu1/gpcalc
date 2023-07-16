@@ -10,12 +10,12 @@ import ClientService from "../services/client";
 import { useRouter } from "next/router";
 
 interface IAuthContext {
-  setUser: (user: UserInterface) => void;
+  setUser: (user: UserInterface | null) => void;
   fetchUser: () => void;
   user: UserInterface | null;
 }
 
-interface AuthContextProps {
+export interface ContextProps {
   children?: ReactNode;
 }
 
@@ -25,7 +25,7 @@ const AuthContext = createContext<IAuthContext>({
   user: null,
 });
 
-const AuthProvider = ({ children }: AuthContextProps) => {
+const AuthProvider = ({ children }: ContextProps) => {
   const router = useRouter();
   const [user, setUser] = useState<UserInterface | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     const protectRoute = async () => {
       // check if it is an auth route
       const isAuthRoute = router.pathname.split("/")[1] === "auth";
-      const isHomePage = router.pathname === "/" || router.pathname === ""
+      const isHomePage = router.pathname === "/" || router.pathname === "";
       if (!isAuthRoute && !isHomePage && !user) {
         try {
           await fetchUser();

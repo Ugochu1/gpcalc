@@ -5,6 +5,7 @@ import { Course, UserInterface } from "../interfaces/UserInterface";
 import { MainRecord } from "../interfaces/RecordsInterface";
 import { AxiosRequestConfig } from "axios";
 import { CreateRecordInputs } from "@/components/createRecord/CreateRecord";
+import { DeleteResult } from "mongodb";
 
 export interface RecordRequest {
   id: string;
@@ -68,6 +69,10 @@ class ClientService {
       Pick<MainRecord, "_id" | "records" | "gpa">,
       MainRecord
     >("/record/save", payload);
+  }
+
+  static delete(payload: string) {
+    return this.api.delete<null, DeleteResult>(`/record/delete_record?id=${payload}`);
   }
 
   // server requests go here

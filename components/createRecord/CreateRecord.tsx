@@ -1,11 +1,12 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./CreateRecord.module.scss";
 import TextInput from "../TextInput/TextInput";
 import { useForm, SubmitHandler } from "react-hook-form";
-import InfoModal from "../infoModal/InfoModal";
 import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import ClientService from "@/lib/services/client";
 import { RecordPreviewProps } from "../recordPreview/RecordPreview";
+import { useNotificationContext } from "@/lib/contexts/NotificationContext";
+import { Loading } from "../pageLoader/PageLoader";
 
 type Inputs = {
   title: string;
@@ -17,8 +18,9 @@ export type CreateRecordInputs = {
   record_no: number;
 };
 
-const CreateRecord: FC<RecordPreviewProps> = ({record, setRecord}) => {
-  const [show, setShow] = useState<boolean>(false);
+const CreateRecord: FC<RecordPreviewProps> = ({ record, setRecord }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const { setNotification, setShowNotification } = useNotificationContext();
 
   const {
     handleSubmit,
@@ -27,9 +29,8 @@ const CreateRecord: FC<RecordPreviewProps> = ({record, setRecord}) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const [myTitle, setMyTitle] = useState<string>("");
-
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setLoading(true);
     const _data: { title: string; record_no: number } = {
       ...data,
       record_no: parseInt(data.record_no),
@@ -38,21 +39,21 @@ const CreateRecord: FC<RecordPreviewProps> = ({record, setRecord}) => {
     // call the initializing endpoint.
     const response = await ClientService.initializeRecord(_data);
     if (typeof response !== "string" && typeof response !== "boolean") {
-      setMyTitle(response.record.title)
+      setNotification(
+        `${response.record.title.toUpperCase()} created successfully.`
+      );
       setRecord && setRecord([response.record, ...(record as MainRecord[])]);
       // setMyRecord([response.record, ...(record as MainRecord[])]);
+    } else {
+      setNotification("There was an error initializing the record.");
     }
-    setShow(true);
+    setShowNotification(true);
+    setLoading(false);
     reset();
   };
 
   return (
     <>
-      <InfoModal show={show} setShow={setShow}>
-        {myTitle
-          ? `Record "${myTitle}" created successfully`
-          : "There was an error while initializing the record"}
-      </InfoModal>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form}>
           <TextInput
@@ -75,7 +76,7 @@ const CreateRecord: FC<RecordPreviewProps> = ({record, setRecord}) => {
               Record Number is required
             </span>
           )}
-          <button>Create</button>
+          <button>Create {loading && <Loading />}</button>
         </div>
       </form>
     </>
