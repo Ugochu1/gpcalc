@@ -27,7 +27,7 @@ export interface GetProps {
 class ClientService {
   static get api() {
     return http({
-      baseURL: `http://localhost:3000/api/user`,
+      baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/user`,
     });
   }
 

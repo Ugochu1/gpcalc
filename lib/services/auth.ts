@@ -8,7 +8,7 @@ class AuthService {
   // instantiate the api
   static get api() {
     return http({
-      baseURL: `http://localhost:3000/api/auth`,
+      baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth`,
     });
   }
 
