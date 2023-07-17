@@ -62,7 +62,7 @@ const RecordWorkspace: FC<RecordWorkspaceProps> = ({ record, selected }) => {
   useEffect(() => {
     setRecords((record && record.records) || []);
     setRecordNo((record && record.record_no) || 10);
-    setGpa((record && parseFloat(record.gpa)))
+    setGpa(record && parseFloat(record.gpa));
   }, [record]);
 
   const clear = () => {
@@ -84,32 +84,57 @@ const RecordWorkspace: FC<RecordWorkspaceProps> = ({ record, selected }) => {
     }
   }, [selected]);
 
+  function verifyRecords() {
+    const gradeList = ["A", "B", "C", "D", "E", "F"];
+    return new Promise((resolve) => {
+      for (let i = 0; i < records.length; i++) {
+        const record = records[i];
+        if (
+          record.name.length === 0 ||
+          record.grade.length === 0 ||
+          !gradeList.includes(record.grade) ||
+          record.unit_load === 0 ||
+          isNaN(record.unit_load)
+        ) {
+          resolve(false);
+        }
+      }
+      resolve(true);
+    });
+  }
+
   const getGPA = async () => {
-    const response1 = await ClientService.calculateGPA(records);
-    if (selected !== "none") {
-      if (typeof response1 !== "string") {
-        // save the data to the database
-        const response2 = await ClientService.save({
-          _id: selected,
-          records,
-          gpa: response1.toString(),
-        });
-        if (typeof response2 !== "string") {
-          // setInfo modal message
-          setMessage(
-            `${response2.title.toUpperCase()} Record updated successfully. Your current GPA is ${response1}`
-          );
-          setShow(true);
+    const response = await verifyRecords();
+    if (response) {
+      const response1 = await ClientService.calculateGPA(records);
+      if (selected !== "none") {
+        if (typeof response1 !== "string") {
+          // save the data to the database
+          const response2 = await ClientService.save({
+            _id: selected,
+            records,
+            gpa: response1.toString(),
+          });
+          if (typeof response2 !== "string") {
+            // setInfo modal message
+            setMessage(
+              `${response2.title.toUpperCase()} Record updated successfully. Your current GPA is ${response1}`
+            );
+            setGpa(response1);
+          }
+        }
+      } else {
+        if (typeof response1 !== "string") {
+          setMessage(`Your GPA is ${response1.toFixed(2)}`);
           setGpa(response1);
         }
       }
     } else {
-      if (typeof response1 !== "string") {
-        setMessage(`Your GPA is ${response1.toFixed(2)}`);
-        setShow(true);
-        setGpa(response1);
-      }
+      setMessage(
+        "Please, correctly input all the required details to calculate your GPA."
+      );
     }
+    setShow(true);
   };
 
   return (
@@ -120,7 +145,7 @@ const RecordWorkspace: FC<RecordWorkspaceProps> = ({ record, selected }) => {
       <div className="flex flex-col gap-6 items-start pb-20">
         {/* {JSON.stringify(records && records)} */}
         <div>
-          Current GPA: <strong>{gpa && gpa.toFixed(2) || "None"}</strong>
+          Current GPA: <strong>{(gpa && gpa.toFixed(2)) || "None"}</strong>
         </div>
 
         {records && records.length > 0 && (

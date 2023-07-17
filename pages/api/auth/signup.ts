@@ -23,17 +23,17 @@ export default async function signup(
   async function run(): Promise<UserInterface | string> {
     return tryCatch(async () => {
       const user_exists = await User.exists({
-        username: username,
+        username: username.trim(),
       });
       // console.log(user_exists)
       if (user_exists) {
         return "This username already exists";
       } else {
         const user = new User<UserInterface>({
-          firstname,
-          lastname,
-          username,
-          password: hash(password),
+          firstname: firstname.trim(),
+          lastname: lastname.trim(),
+          username: username.trim(),
+          password: hash(password.trim()),
           createdAt: new Date(),
         });
         await user.save(); // save the new user to the database.

@@ -33,7 +33,7 @@ const CreateRecord: FC<RecordPreviewProps> = ({ record, setRecord }) => {
     setLoading(true);
     const _data: { title: string; record_no: number } = {
       ...data,
-      record_no: parseInt(data.record_no),
+      record_no: parseInt(data.record_no.trim()),
     };
 
     // call the initializing endpoint.

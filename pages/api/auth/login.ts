@@ -30,8 +30,8 @@ export default async function login(
   > {
     return tryCatch(async () => {
       const user = await User.findOne<UserInterface>({
-        username,
-        password: hash(password),
+        username: username.trim(),
+        password: hash(password.trim()),
       });
       if (!user) {
         return "Invalid username or password";

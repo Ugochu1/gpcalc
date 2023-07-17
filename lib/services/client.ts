@@ -65,7 +65,7 @@ class ClientService {
   }
 
   static save(payload: Pick<MainRecord, "_id" | "records" | "gpa">) {
-    return this.api.post<
+    return this.api.put<
       Pick<MainRecord, "_id" | "records" | "gpa">,
       MainRecord
     >("/record/save", payload);

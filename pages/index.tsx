@@ -24,6 +24,14 @@ const Homepage: NextPageWithLayout = () => {
   const scrollPos = useScrollPos();
   const progressRef = useRef<HTMLDivElement>(null);
 
+  function scrollToAbout() {
+    if (progressRef.current) {
+      progressRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }
+
   useEffect(() => {
     progressRef.current && setDivTop(progressRef.current.offsetTop);
   }, []);
@@ -50,7 +58,7 @@ const Homepage: NextPageWithLayout = () => {
           <Link href="/auth/signup">
             <Button>Get started</Button>
           </Link>
-          <div className={styles.aboutbutton}>
+          <div className={styles.aboutbutton} onClick={scrollToAbout}>
             <div className={styles.button}>
               <HiDocumentText size={25} style={{ color: "white" }} />
             </div>

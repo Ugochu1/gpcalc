@@ -23,7 +23,7 @@ export default async function initialize(
       }
       // create a new record with the details provided.
       const record = new Record<MainRecord>({
-        title,
+        title: title.trim(),
         user: accessStatus._id as string,
         lastModified: new Date(),
         gpa: "",
