@@ -8,15 +8,14 @@ export const Loading: FC = () => (
   </div>
 );
 
-const PageLoader: FC = () => {
-  const [show, setShow] = useState<boolean>(true);
-  return show ? (
-    <div className={styles.loader} onAnimationEnd={() => setShow(false)}>
+const PageLoader: FC<{ setLoaded: (loaded: boolean) => void }> = ({
+  setLoaded,
+}) => {
+  return (
+    <div className={styles.loader} onAnimationEnd={() => setLoaded(false)}>
       <div className={styles.circular_loader} />
       <Logo />
     </div>
-  ) : (
-    <></>
   );
 };
 

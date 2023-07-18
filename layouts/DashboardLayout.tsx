@@ -25,6 +25,7 @@ type DashboardLayoutProps = {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [currentRoute, setCurrentRoute] = useState<string>("");
   const [dropped, setDropped] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState<boolean>(true);
   const router = useRouter();
   const { user, setUser } = useAuthContext();
   const { setShowNotification, setNotification } = useNotificationContext();
@@ -57,8 +58,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <>
       <div className={styles.mainlayout}>
-        <PageLoader />
-
+        {loaded && <PageLoader setLoaded={setLoaded} />}
         <div
           className={`${styles.absolute} ${dropped && styles.active}`}
           onClick={() => setDropped(false)}
