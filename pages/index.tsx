@@ -14,6 +14,7 @@ import useScreenSize from "@/hooks/useScreenSize";
 import useScrollPos from "@/hooks/useScrollPos";
 import Footer from "@/components/footer/Footer";
 import Link from "next/link";
+import Head from "next/head";
 
 const iconStyle = {
   color: "white",
@@ -49,6 +50,9 @@ const Homepage: NextPageWithLayout = () => {
 
   return (
     <div className={styles.page_wrapper}>
+      <Head>
+        <title>GPCalc - Homepage</title>
+      </Head>
       <div className={styles.landing}>
         <div className={styles.text}>
           <p>An easy to use platform.</p>

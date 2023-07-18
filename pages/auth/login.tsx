@@ -11,6 +11,7 @@ import { useAuthContext } from "@/lib/contexts/AuthContext";
 import { useState } from "react";
 import { useNotificationContext } from "@/lib/contexts/NotificationContext";
 import { Loading } from "@/components/pageLoader/PageLoader";
+import Head from "next/head";
 
 type Inputs = {
   username: string;
@@ -53,6 +54,9 @@ const Login: NextPageWithLayout = () => {
 
   return (
     <>
+      <Head>
+        <title>GPCalc - Login</title>
+      </Head>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input}>
           <TextInput

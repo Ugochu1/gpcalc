@@ -10,6 +10,7 @@ import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import { useRouter } from "next/router";
 import RecordWorkspace from "@/components/record_workspace/RecordWorkspace";
 import { useNotificationContext } from "@/lib/contexts/NotificationContext";
+import Head from "next/head";
 
 const CalculateGPA: NextPageWithLayout = () => {
   const [dropped, setDropped] = useState(false);
@@ -55,6 +56,9 @@ const CalculateGPA: NextPageWithLayout = () => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>GPCalc - Calculate GPA</title>
+      </Head>
       <Greeting header="Calculate GPA" />
       <div className={styles.main}>
         <div className={styles.select}>

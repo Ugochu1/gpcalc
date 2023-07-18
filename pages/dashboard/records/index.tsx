@@ -9,6 +9,7 @@ import withSession from "@/lib/hooks/withSession";
 import ClientService from "@/lib/services/client";
 import { MainRecord } from "@/lib/interfaces/RecordsInterface";
 import { useState, createContext, useContext } from "react";
+import Head from "next/head";
 
 const Records: NextPageWithLayout<{ records: MainRecord[], count: number }> = ({
   records,
@@ -19,6 +20,9 @@ const Records: NextPageWithLayout<{ records: MainRecord[], count: number }> = ({
 
   return (
     <div>
+      <Head>
+        <title>GPCalc - Records</title>
+      </Head>
       <Greeting header={`My Records`} />
       <div className={styles.recentActivity}>
         <div className={styles.activities}>

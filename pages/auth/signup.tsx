@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Loading } from "@/components/pageLoader/PageLoader";
 import { useNotificationContext } from "@/lib/contexts/NotificationContext";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Signup: NextPageWithLayout = () => {
   const {
@@ -39,6 +40,9 @@ const Signup: NextPageWithLayout = () => {
 
   return (
     <>
+      <Head>
+        <title>GPCalc - Signup</title>
+      </Head>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input}>
           <TextInput

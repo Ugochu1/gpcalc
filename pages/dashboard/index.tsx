@@ -9,6 +9,7 @@ import { useAuthContext } from "@/lib/contexts/AuthContext";
 import withSession from "@/lib/hooks/withSession";
 import ClientService from "@/lib/services/client";
 import { useState } from "react";
+import Head from "next/head";
 
 const DashboardHome: NextPageWithLayout<{ records: MainRecord[] }> = ({
   records,
@@ -30,6 +31,9 @@ const DashboardHome: NextPageWithLayout<{ records: MainRecord[] }> = ({
 
   return (
     <div className={styles.page_wrapper}>
+      <Head>
+        <title>GPCalc - Dashboard</title>
+      </Head>
       <Greeting header={"Welcome, " + user?.firstname} />
       <div className={styles.infosection}>
         <div className={`${styles.info} ${styles.main}`}>

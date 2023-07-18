@@ -39,6 +39,7 @@ export default function withSession(handler?: Handler) {
       };
     } catch (err: any) {
       console.log(err.message);
+      // console.log("an error was detected here")
       return {
         redirect: {
           permanent: false,

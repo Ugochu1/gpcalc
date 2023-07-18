@@ -78,7 +78,7 @@ class ClientService {
   // server requests go here
   static get serverapi() {
     return serverHttp({
-      baseURL: `http://localhost:3000/api/user`,
+      baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/api/user`,
     });
   }
 
