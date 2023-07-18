@@ -82,9 +82,6 @@ const Login: NextPageWithLayout = () => {
             </span>
           )}
 
-          <div className="text-xs text-right text-blue-600">
-            Forgot Password?
-          </div>
           <button>Sign In {loading && <Loading />}</button>
           <p className="text-sm">
             Don&apos;t have an account?{" "}
