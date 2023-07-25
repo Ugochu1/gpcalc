@@ -61,7 +61,7 @@ const RecordPreview: FC<RecordPreviewProps> = ({
 
     if (timeDiff / inMinutes < 60) {
       const time = Math.floor(timeDiff / inMinutes);
-      if (time === 0) {
+      if (time <= 0) {
         return "Just now";
       }
       return `${time} min${time > 1 ? "s" : ""} ago`;
