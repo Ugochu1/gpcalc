@@ -11,8 +11,11 @@ export const Loading: FC = () => (
 const PageLoader: FC<{ setLoaded: (loaded: boolean) => void }> = ({
   setLoaded,
 }) => {
+  useEffect(() => {
+    setTimeout(() => setLoaded(false), 700);
+  }, []);
   return (
-    <div className={styles.loader} onAnimationEnd={() => setLoaded(false)}>
+    <div className={styles.loader}>
       <div className={styles.circular_loader} />
       <Logo />
     </div>
